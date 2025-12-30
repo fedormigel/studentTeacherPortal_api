@@ -1,235 +1,29 @@
 {
 	"info": {
-		"_postman_id": "fa85ecc3-73b4-4e2b-beb7-4607f9f0fbfd",
-		"name": "ASK-Tests Copy",
+		"_postman_id": "f564146d-c2bf-4e81-b65c-8c7434f785f1",
+		"name": "Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "36980670",
-		"_collection_link": "https://myself-0942.postman.co/workspace/Practice~46c622a0-fbe5-47d7-a4eb-d9aa941fc3f4/collection/36980670-fa85ecc3-73b4-4e2b-beb7-4607f9f0fbfd?action=share&source=collection_link&creator=36980670"
+		"_collection_link": "https://myself-0942.postman.co/workspace/Practice~46c622a0-fbe5-47d7-a4eb-d9aa941fc3f4/collection/36980670-f564146d-c2bf-4e81-b65c-8c7434f785f1?action=share&source=collection_link&creator=36980670"
 	},
 	"item": [
 		{
-			"name": "/quiz - [T] Create a new quiz",
+			"name": "/quiz - [T] Create a new quiz Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
+							"pm.test(\"Status code check\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Response time is less than 400ms\", function () {",
+							"pm.test(\"Response time check\", function () {",
 							"    pm.expect(pm.response.responseTime).to.be.below(400);",
 							"});",
 							"",
 							"var jsonData = pm.response.json();",
 							"pm.environment.set(\"quizId\", jsonData.id);"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{teacherToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"Demo Quiz Dec18th\",\n  \"totalScore\": 18,\n  \"passingPercentage\": 75,\n  \"showStopperQuestion\": 1,\n  \"questions\": [\n    {\n      \"type\": \"TEXTUAL\",\n      \"question\": \"What is your name?\",\n      \"score\": 5\n    },\n    {\n      \"type\": \"SINGLE_CHOICE\",\n      \"question\": \"Which city is city largest in California?\",\n      \"score\": 7,\n      \"answer\": 2,\n      \"hasOtherOption\": false,\n      \"options\": [\n        \"San Francisco\",\n        \"Sacramento\",\n        \"Los Angeles\",\n        \"Redding\"\n      ]\n    },\n    {\n      \"type\": \"MULTIPLE_CHOICE\",\n      \"question\": \"Who was Apple founded by?\",\n      \"score\": 6,\n      \"answers\": [\n        0,\n        1,\n        2\n      ],\n      \"hasOtherOption\": true,\n      \"options\": [\n        \"Steve Jobs\",\n        \"Steve Wozniak\",\n        \"Ronald Wayne\",\n        \"Ronald Reagan\"\n      ]\n    }\n  ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/quiz",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"quiz"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/assignment - [T] - Create a new assignment",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Response time is less than 400ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(400);",
-							"});",
-							"",
-							"var jsonData = pm.response.json();",
-							"pm.environment.set(\"assignmentId\", jsonData[0].id);",
-							"",
-							"var jsonData = pm.response.json();",
-							"pm.environment.set(\"assignmentGroupID\", jsonData[0].assignmentGroupID);"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{teacherToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"quizId\": {{quizId}},\n  \"userIds\": [{{studentId}}]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/assignment",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"assignment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/submit-assignment - [S] - Submits assignment's result",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Response time is less than 400ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(400);",
-							"});",
-							"",
-							"pm.test(\"Verify status, result, and gradedBy\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData[1].status).to.eql(\"GRADED\");",
-							"    pm.expect(jsonData[1].result).to.eql(\"PASSED\");",
-							"    pm.expect(jsonData[1].gradedBy).to.eql(\"AUTOMATIC\");",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{studentToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"assignmentId\": {{assignmentId}},\n\"answers\": [\n    {\"textAnswer\": \"Fedor Migel\", \"answer\": null}, \n    {\"textAnswer\": \"\", \"answer\": 2}, \n    {\"textAnswer\": \"\", \"answer\": [1, 2, 0]}\n]\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/submit-assignment",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"submit-assignment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/assignment - [T] - Grade assignment Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Response time is less than 5000ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(5000);",
-							"});",
-							"",
-							"pm.test(\"Verify status, result, and gradedBy\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData[jsonData.length-1].status).to.eql(\"GRADED\");",
-							"    pm.expect(jsonData[jsonData.length-1].result).to.eql(\"PASSED\");",
-							"    pm.expect(jsonData[jsonData.length-1].gradedBy).to.eql(\"TEACHER\");",
-							"});"
 						],
 						"type": "text/javascript",
 						"packages": {},
@@ -259,11 +53,11 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"summary\": \"Summary from teacher\",\n  \"result\": \"PASSED\",\n  \"grades\": [\n    {\n      \"comment\": \"Teacher comment\",\n      \"additionalScore\": 5\n    }\n  ]\n}",
+					"raw": "{\n  \"name\": \"Demo Quiz Dec29th\",\n  \"totalScore\": 18,\n  \"passingPercentage\": 75,\n  \"showStopperQuestion\": 1,\n  \"questions\": [\n    {\n      \"type\": \"TEXTUAL\",\n      \"question\": \"What is your name?\",\n      \"score\": 5\n    },\n    {\n      \"type\": \"SINGLE_CHOICE\",\n      \"question\": \"Which city is city largest in California?\",\n      \"score\": 7,\n      \"answer\": 2,\n      \"hasOtherOption\": false,\n      \"options\": [\n        \"San Francisco\",\n        \"Sacramento\",\n        \"Los Angeles\",\n        \"Redding\"\n      ]\n    },\n    {\n      \"type\": \"MULTIPLE_CHOICE\",\n      \"question\": \"Who was Apple founded by?\",\n      \"score\": 6,\n      \"answers\": [\n        0,\n        1,\n        2\n      ],\n      \"hasOtherOption\": true,\n      \"options\": [\n        \"Steve Jobs\",\n        \"Steve Wozniak\",\n        \"Ronald Wayne\",\n        \"Ronald Reagan\"\n      ]\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -271,13 +65,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/assignment/{{assignmentId}}",
+					"raw": "{{baseUrl}}/quiz",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"assignment",
-						"{{assignmentId}}"
+						"quiz"
 					]
 				}
 			},
